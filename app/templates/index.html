@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>imgshow</title>
+    <title>vibiu's Blog</title>
     <link rel="stylesheet" type="text/css" href="/static/css/index.css">
     <link rel="shortcut icon" href="/static/img/vicon.png" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
+
 <body>
 <header id="header">
     <div class="header-container">
@@ -52,32 +53,36 @@
 
 <div class="wrapper">
     <div class="content">
-    <article>
-        <h2><time class="date-updated" datetime="2016-02-07T16:43:08+00:00" itemprop="datePublished" pubdate>Apr,27,2016</time></h2>
-        <div class="passage">
-            When you see this. I have make my desision to build my own blog website.
-            But now it seams that there are still loads of things waiting for me to do.
+        <article>
+            <h2><time class="date-updated" datetime="2016-02-07T16:43:08+00:00" itemprop="datePublished" pubdate>Apr,27,2016</time></h2>
+            <div class="passage">
+                When you see this. I have make my desision to build my own blog website.
+                But now it seams that there are still loads of things waiting for me to do.
 
-            I'll talk about the techonical details first. I use python's frame Flask to build my back-end. I write the front-end by myself, though I was supposed to ask a guy who is professional of front-end to write it. 
+                I'll talk about the techonical details first. I use python's frame Flask to build my back-end. I write the front-end by myself, though I was supposed to ask a guy who is professional of front-end to write it. 
 
-            As for Front-end reverse proxy, Nginx is my choice, beacause it's free and open source(though I maybe never have the chance to contribute a single code for nginx).
+                As for Front-end reverse proxy, Nginx is my choice, beacause it's free and open source(though I maybe never have the chance to contribute a single code for nginx).
 
-            Since now, I only use sqlite as my database, I guess I would soon turn to Mysql or MongoDB. I was weak of Front-end, so I plan to find a Front frame to write my webpage, this could be Bootstrap or React. Maybe I should also learn Vue.js or Anguler.js. But I think I should choose it carefully for the fact that there are to many Front frame coming out these days.
+                Since now, I only use sqlite as my database, I guess I would soon turn to Mysql or MongoDB. I was weak of Front-end, so I plan to find a Front frame to write my webpage, this could be Bootstrap or React. Maybe I should also learn Vue.js or Anguler.js. But I think I should choose it carefully for the fact that there are to many Front frame coming out these days.
 
-            Well, best wishes to myself.
+                Well, best wishes to myself.
+            </div>
+        </article>
+        <div id="response" class="comment-reponse">
+            <h3 id="reply-title">发表评论</h3>
+            <form id="commentform" class="comment-form" method="post">
+            <p>
+                <textarea id="comment" required="required" aria-required="true" rows="5" cols="100" name="comment"></textarea>
+            </p>
+            <span id="reply-email">邮箱地址</span>
+            <span><input id="comment-email" required="required" rows="2" cols="100" name="comment-email"/></span>
+            <div>
+                <button id="commentbutton">commit</button>
+            </div>
+            </form>
         </div>
-    </article>
-    <div id="response" class="comment-reponse">
-        <h3 id="reply-title">发表评论</h3>
-        <form id="commentform" class="comment-form" method="post" action="#">
-        <p>
-            <textarea id="comment" required="required" aria-required="true" rows="5" cols="100" name="comment"></textarea>
-        </p>
-        </form>
-    </div>
     </div>
 </div>
-    
-</div>
+<script type="text/javascript" src="/static/js/index.js"></script>
 </body>
 </html>
