@@ -70,14 +70,14 @@
         </article>
         <div id="response" class="comment-reponse">
             <h3 id="reply-title">发表评论</h3>
-            <form id="commentform" class="comment-form" method="post">
+            <form id="comment-form" class="comment-form" method="post" action="/api/1.0/comment">
             <p>
-                <textarea id="comment" required="required" aria-required="true" rows="5" cols="100" name="comment"></textarea>
+                <textarea id="comment-body" required="required" aria-required="true" rows="5" cols="100" name="comment"></textarea>
             </p>
             <span id="reply-email">邮箱地址</span>
             <span><input id="comment-email" required="required" rows="2" cols="100" name="comment-email"/></span>
             <div>
-                <button id="commentbutton">commit</button>
+                <a id="comment-submit" href="#" onclick="commentSubmit">submit</a>
             </div>
             </form>
         </div>

@@ -7,13 +7,16 @@ from . import api
 
 @api.route('/comment', methods=['POST'])
 def comment_post():
-    if not requst.method == 'POST':
+    if not request.method == 'POST':
         abort(400)
     request_content = request.get_json(True)
     comment = Comment()
     comment.body = request_content.get('body')
     comment.email = request_content.get('email')
     comment.timestamp = datetime.utcnow()
-    db.session.add(comment)
-    db.session.commit()
-    return jsonify({"message": "comment success"}), 201
+    try:
+        db.session.add(comment)
+        db.session.commit()
+    except Exception:
+        return jsonify({"message": "comment fail."}), 500
+    return jsonify({"message": "comment success."}), 201
