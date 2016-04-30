@@ -7,13 +7,14 @@ function commentSubmit() {
         alert('you haven\'t write your comment.');
     } else if  (commentEmail.value == '') {
         alert('you haven\'t remain your email address.');
+    } else {
+        var data = {
+            "body": commentBody.value,
+            "email": commentEmail.value
+        }
+        jsonData = JSON.stringify(data);
+        ajaxPost(jsonData, '/api/1.0/comment');
     }
-    var data = {
-        "body": commentBody.value,
-        "email": commentEmail.value
-    }
-    jsonData = JSON.stringify(data);
-    ajaxPost(jsonData, '/api/1.0/comment');
 }
 
 function ajaxPost(data, url) {
