@@ -12,7 +12,7 @@ class Config(object):
 
 
 class ProductConfig(Config):
-    SQLALCHEY_DATABASE_URI = os.environ.get(
+    SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATA_BASE') or 'sqlite:////' + os.path.join(basedir, 'data.sqlite')
 
 

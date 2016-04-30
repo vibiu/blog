@@ -1,5 +1,6 @@
 from flask import request, jsonify, abort
 from .. models import Comment
+from .. import db
 from datetime import datetime
 
 from . import api

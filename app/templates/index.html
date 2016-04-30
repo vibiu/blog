@@ -2,9 +2,11 @@
 <html>
 <head>
     <title>vibiu's Blog</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/static/css/index.css">
     <link rel="shortcut icon" href="/static/img/vicon.png" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/static/js/index.js"></script>
 </head>
 
 <body>
@@ -75,14 +77,14 @@
                 <textarea id="comment-body" required="required" aria-required="true" rows="5" cols="100" name="comment"></textarea>
             </p>
             <span id="reply-email">邮箱地址</span>
-            <span><input id="comment-email" required="required" rows="2" cols="100" name="comment-email"/></span>
+            <span><input id="comment-email" required="required" rows="2" cols="60" name="comment-email"/></span>
             <div>
-                <a id="comment-submit" href="#" onclick="commentSubmit">submit</a>
+                <a id="comment-submit" href="#" onclick="commentSubmit()">submit</a>
             </div>
             </form>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/static/js/index.js"></script>
+
 </body>
 </html>
