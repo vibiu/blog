@@ -14,6 +14,8 @@ function commentSubmit() {
         }
         jsonData = JSON.stringify(data);
         ajaxPost(jsonData, '/api/1.0/comment');
+        commentBody.value = '';
+        commentEmail.value = '';
     }
 }
 

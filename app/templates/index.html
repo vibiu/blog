@@ -53,38 +53,39 @@
 
 </header>
 
+
 <div class="wrapper">
     <div class="content">
         <article>
             <h2><time class="date-updated" datetime="2016-02-07T16:43:08+00:00" itemprop="datePublished" pubdate>Apr,27,2016</time></h2>
             <div class="passage">
-                When you see this. I have make my desision to build my own blog website.
-                But now it seams that there are still loads of things waiting for me to do.
-
-                I'll talk about the techonical details first. I use python's frame Flask to build my back-end. I write the front-end by myself, though I was supposed to ask a guy who is professional of front-end to write it. 
-
-                As for Front-end reverse proxy, Nginx is my choice, beacause it's free and open source(though I maybe never have the chance to contribute a single code for nginx).
-
-                Since now, I only use sqlite as my database, I guess I would soon turn to Mysql or MongoDB. I was weak of Front-end, so I plan to find a Front frame to write my webpage, this could be Bootstrap or React. Maybe I should also learn Vue.js or Anguler.js. But I think I should choose it carefully for the fact that there are to many Front frame coming out these days.
-
-                Well, best wishes to myself.
+                {% filter markdown %}{{ markdown_content|safe }}{% endfilter %}
             </div>
         </article>
+
+        <h3 id="reply-title">发表评论</h3>
         <div id="response" class="comment-reponse">
-            <h3 id="reply-title">发表评论</h3>
             <form id="comment-form" class="comment-form" method="post" action="/api/1.0/comment">
-            <p>
-                <textarea id="comment-body" required="required" aria-required="true" rows="5" cols="100" name="comment"></textarea>
-            </p>
-            <span id="reply-email">邮箱地址</span>
-            <span><input id="comment-email" required="required" rows="2" cols="60" name="comment-email"/></span>
-            <div>
-                <a id="comment-submit" href="#" onclick="commentSubmit()">submit</a>
+            <div class="comment-form-body">
+                <textarea id="comment-body" class="comment-input" required="required"  name="comment-body"></textarea>
+            </div>
+            <div class="comment-form-email">
+                <label for="url">邮箱地址</label>
+                <input id="comment-email" class="comment-input"  required="required"  name="comment-email"/>
+            </div>
+            <div class="comment-form-submit" onclick="script:commentSubmit()">
+                <span id="comment-submit" href="#">submit</span>
             </div>
             </form>
         </div>
     </div>
 </div>
 
+
+<footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+    © 2015–2016 Vibiu's Platform| <a href="https://immmmm.com/wordpress-theme-motify.html">Motify Theme Moded</a>
+    <br><br>
+    Not Powered by <a href="https://wordpress.org/" target="_blank">Wordpress</a>
+</footer>
 </body>
 </html>
