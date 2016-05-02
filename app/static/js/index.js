@@ -38,3 +38,26 @@ function ajaxPost(data, url) {
     xhr.setRequestHeader('Content-Type','application/json');
     xhr.send(data)
 }
+
+function insertMarkdown() {
+    markdownGet('/api/1.0/markdown');
+}
+
+function markdownGet(url) {
+    if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+        xhr = new XMLHttpRequest();
+    } else if (window.ActiveXObject) { // IE 6 and older
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                document.getElementsByClassName('passage')[0].innerHTML = xhr.responseText;
+            } else {
+                document.getElementsByClassName('passage')[0].innerHTML = null;
+            }
+        }
+    }
+    xhr.open('GET',url,true);
+    xhr.send(null)
+}

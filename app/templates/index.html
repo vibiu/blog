@@ -48,7 +48,6 @@
                     <span>Feed</span>
                 </a>
             </li>
-
         </ul>
     </div>
 
@@ -59,9 +58,7 @@
     <div class="content">
         <article>
             <h2><time class="date-updated" datetime="2016-02-07T16:43:08+00:00" itemprop="datePublished" pubdate>Apr,27,2016</time></h2>
-            <div class="passage">
-                {% filter markdown %}{{ markdown_content|safe }}{% endfilter %}
-            </div>
+            <div class="passage"></div>
         </article>
 
         <h3 id="reply-title">发表评论</h3>
@@ -88,5 +85,8 @@
     <br><br>
     Not Powered by <a href="https://wordpress.org/" target="_blank">Wordpress</a>
 </footer>
+<script type="text/javascript">
+    insertMarkdown();
+</script>
 </body>
 </html>

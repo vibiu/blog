@@ -74,7 +74,10 @@ pre {
     margin: 0 auto;
 }
 
-
+.passage p img {
+    width:886px;
+    height: auto;
+}
 .comment-input{
     border: 1px solid #ddd;
 }
