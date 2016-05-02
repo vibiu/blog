@@ -1,0 +1,35 @@
+body, input, textarea, select, button, blockquote {
+    font: 14px/1.5 "PingFang SC","Hiragino Sans GB","WenQuanYi Micro Hei","Microsoft YaHei",sans-serif;
+    /*font-family: "Georgia",​serif;*/
+}
+
+h2, h3 {
+    font-size: 16px;
+}
+h1, h2, h3 {
+    font-weight: 400;
+}
+code {
+    font-family: "Consolas","Menlo","Deja Vu Sans Mono","Bitstream Vera Sans Mono",monospace;
+    font-size: 0.9em;
+}
+
+#header{
+    font-size: 16px;
+}
+.site-title{
+    font-size: 3rem;
+}
+
+.main-navigation a {
+    font-size: 14px;
+}
+
+.passage{
+    font-size: 17px;
+    font-family: "Georgia",​serif;
+}
+
+.footer{
+    font-size: 11px;
+}

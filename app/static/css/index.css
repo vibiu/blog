@@ -6,11 +6,7 @@ body{
     margin: 0;
     padding: 0;
 }
-h2, h3 {
-    font-size: 16px;
-}
 h1, h2, h3 {
-    font-weight: 400;
     margin: 0;
 }
 ol,ul,li{
@@ -18,23 +14,22 @@ ol,ul,li{
     margin: 0;
     padding: 0
 }
-body, input, textarea, select, button, code, blockquote {
-    font: 14px/1.5 "PingFang SC","Hiragino Sans GB","WenQuanYi Micro Hei","Microsoft YaHei",sans-serif;
-}
+
 input, textarea, button {
     outline: none;
 }
 pre {
     background-color: #eee;
-    font-family: "Consolas","Menlo","Deja Vu Sans Mono","Bitstream Vera Sans Mono",monospace;
-    line-height: 27px;
-    padding-left: 30px;
-    border-radius: 2px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    overflow-x:auto;
 }
+
+
+
 #header{
     padding:120px 20px 40px 20px;
     background: #515865;
-    font-size: 16px;
     color: #fff;
 }
 .header-container{
@@ -42,9 +37,7 @@ pre {
     max-width: 780px;
     margin: 0 auto;
 }
-.site-title{
-    font-size: 3rem;
-}
+
 .main-navigation {
     margin: 20px 0;
 }
@@ -61,7 +54,6 @@ pre {
     color: #fff;
     background: rgba(25,25,25,0.4);
     padding: 2px 6px;
-    font-size: 14px;
     border-radius: 3px;
 }
 
@@ -78,15 +70,8 @@ pre {
 
 
 .wrapper{
-    width:980px;
+    width: 888px;
     margin: 0 auto;
-}
-#dashang{
-    border-bottom: 1px solid #f2f2f2;
-}
-
-.passage{
-    font-size: 20px;
 }
 
 
@@ -104,12 +89,12 @@ pre {
 }
 #comment-body{
     height: 100px;
-    min-width: 976px;
-    max-width: 976px;
+    min-width: 884px;
+    max-width: 884px;
     min-height: 28px;
 }
 #comment-email{
-    width:910px;
+    width:800px;
     float:right;
 }
 .comment-form-submit{
@@ -123,7 +108,6 @@ pre {
 
 .footer{
     clear: both;
-    font-size: 11px;
     padding-bottom: 50px;
     padding-top: 50px;
     text-align: center;
