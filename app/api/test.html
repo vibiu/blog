@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>haha</title>
+    <style type="text/css">
+        pre code .kw {
+            color:#101094;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+</head>
+<body>
+<p>When you see this. I have make my desision  to build my own blog website.But now it seams that there
+ are still loads of things waiting for me to do.</p>
+<p>I'll talk about the techonical details first. I use python's frame Flask to build my back-end. I write
+ the front-end by myself, though I was supposed to ask a guy who is professional of front-end to write
+ it. </p>
+<p>As for Front-end reverse proxy, Nginx is my choice, beacause it's free and open source(though I maybe
+ never have the chance to contribute a single code for nginx).</p>
+<p>Since now, I only use sqlite as my database, I guess I would soon turn to Mysql or MongoDB. I was
+ weak of Front-end, so I plan to find a Front frame to write my webpage, this could be Bootstrap or React
+. Maybe I should also learn Vue.js or Anguler.js. But I think I should choose it carefully for the fact
+ that there are to many Front frame coming out these days.</p>
+<p>Well, best wishes to myself.</p>
+<h1>python code:</h1>
+<pre><code> <span class="kw">def</span> bubble_sort(bubble_list):
+    list_length = len(bubble_list)
+     <span class="kw">for</span> i  <span class="kw">in</span> range(list_length):
+         <span class="kw">for</span> j  <span class="kw">in</span> range(i, list_length):
+             <span class="kw">if</span> bubble_list[i] &gt; bubble_list[j]:
+                bubble_list[i],bubble_list[j] = bubble_list[j],bubble_list[i]
+     <span class="kw">return</span> bubble_list
+</code></pre>
+<h1>shell code:</h1>
+<pre><code> <span class="kw">class</span> CharSetGroupProber(CharSetProber):
+     <span class="kw">def</span> __init__(self):
+        CharSetProber.__init__(self)
+        self._mActiveNum = 0
+        self._mProbers = []
+        self._mBestGuessProber =  <span class="kw">None</span> 
+     <span class="kw">def</span> reset(self):
+        CharSetProber.reset(self)
+        self._mActiveNum = 0
+         <span class="kw">for</span> prober  <span class="kw">in</span> self._mProbers:
+             <span class="kw">if</span> prober:
+                prober.reset()
+                prober.active =  <span class="kw">True</span>                 self._mActiveNum += 1
+        self._mBestGuessProber =  <span class="kw">None</span> 
+     <span class="kw">def</span> get_charset_name(self):
+         <span class="kw">if</span>  <span class="kw">not</span> self._mBestGuessProber:
+            self.get_confidence()
+             <span class="kw">if</span>  <span class="kw">not</span> self._mBestGuessProber:
+                 <span class="kw">return</span>  <span class="kw">None</span> #                self._mBestGuessProber = self._mProbers[0]
+         <span class="kw">return</span> self._mBestGuessProber.get_charset_name()
+
+     <span class="kw">def</span> feed(self, aBuf):
+         <span class="kw">for</span> prober  <span class="kw">in</span> self._mProbers:
+             <span class="kw">if</span>  <span class="kw">not</span> prober:
+                 <span class="kw">continue</span>              <span class="kw">if</span>  <span class="kw">not</span> prober.active:
+                 <span class="kw">continue</span>             st = prober.feed(aBuf)
+             <span class="kw">if</span>  <span class="kw">not</span> st:
+                 <span class="kw">continue</span>              <span class="kw">if</span> st == constants.eFoundIt:
+                self._mBestGuessProber = prober
+                 <span class="kw">return</span> self.get_state()
+             <span class="kw">elif</span> st == constants.eNotMe:
+                prober.active =  <span class="kw">False</span>                 self._mActiveNum -= 1
+                 <span class="kw">if</span> self._mActiveNum <= 0:
+                    self._mState = constants.eNotMe
+                     <span class="kw">return</span> self.get_state()
+         <span class="kw">return</span> self.get_state()
+
+     <span class="kw">def</span> get_confidence(self):
+        st = self.get_state()
+         <span class="kw">if</span> st == constants.eFoundIt:
+             <span class="kw">return</span> 0.99
+         <span class="kw">elif</span> st == constants.eNotMe:
+             <span class="kw">return</span> 0.01
+        bestConf = 0.0
+        self._mBestGuessProber =  <span class="kw">None</span>          <span class="kw">for</span> prober  <span class="kw">in</span> self._mProbers:
+             <span class="kw">if</span>  <span class="kw">not</span> prober:
+                 <span class="kw">continue</span>              <span class="kw">if</span>  <span class="kw">not</span> prober.active:
+                 <span class="kw">if</span> constants._debug:
+                    sys.stderr.write(prober.get_charset_name()
+                                     + '  <span class="kw">not</span> active
+')
+                 <span class="kw">continue</span>             cf = prober.get_confidence()
+             <span class="kw">if</span> constants._debug:
+                sys.stderr.write('%s confidence = %s
+' %
+                                 (prober.get_charset_name(), cf))
+             <span class="kw">if</span> bestConf < cf:
+                bestConf = cf
+                self._mBestGuessProber = prober
+         <span class="kw">if</span>  <span class="kw">not</span> self._mBestGuessProber:
+             <span class="kw">return</span> 0.0
+         <span class="kw">return</span> bestConf
+#        else:
+#            self._mBestGuessProber = self._mProbers[0]
+#             <span class="kw">return</span> self._mBestGuessProber.get_confidence()
+</code></pre>
+<h1>javascript code:</h1>
+<pre><code> <span class="kw">if</span> (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+    httpRequest = new XMLHttpRequest();
+}  <span class="kw">else</span>  <span class="kw">if</span> (window.ActiveXObject) { // IE 6  <span class="kw">and</span> older
+    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+};
+httpRequest.onreadystatechange = function(){
+     <span class="kw">if</span> (httpRequest.readyState === XMLHttpRequest.DONE) {
+         <span class="kw">if</span> (httpRequest.status === 200) {
+            // perfect!
+        }  <span class="kw">else</span> {
+            // there w <span class="kw">as</span> a problem  <span class="kw">with</span> the request,
+            //  <span class="kw">for</span> example the response may conta <span class="kw">in</span> a 404 (Not Found)
+            //  <span class="kw">or</span> 500 (Internal Server Error) response code
+        }
+    }  <span class="kw">else</span> {
+        // still  <span class="kw">not</span> ready
+    }
+};
+httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+httpRequest.open('GET', 'http://www.example.org/some.file', true);
+httpRequest.send(null);
+</code></pre>
+
+httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+httpRequest.open('GET', 'http://www.example.org/some.file', true);
+httpRequest.send(null);
+</code></pre>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ from markdown import markdown
 from .. models import Comment, Article
 from .. import db
 from datetime import datetime
+from render import splite_code
 
 from . import api
 
@@ -28,4 +29,6 @@ def comment_post():
 def markdown_get():
     markdown_article = Article.query.first()
     parsed_markdown = markdown(markdown_article.body)
-    return parsed_markdown, 200
+    beautify_markdown = splite_code(parsed_markdown)
+    # return parsed_markdown, 200
+    return beautify_markdown, 200

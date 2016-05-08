@@ -33,3 +33,6 @@ code {
 .footer{
     font-size: 11px;
 }
+pre code .kw{
+    color: #1010ee;
+}
