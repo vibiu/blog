@@ -1,12 +1,24 @@
-from flask import request, jsonify, abort, session
+from flask import request, jsonify, abort, session, make_response
 from markdown import markdown
 from .. models import Comment, Article
 from .. import db
+from functools import wraps
 from datetime import datetime
 from render import splite_code
 from mail163 import LoginUser, jsonfy_mail_info
 
 from . import api
+
+def allow_cross_domain(fun):
+    @wraps(fun)
+    def wrapper_fun(*args, *kwargs):
+        rst = make_response(fun(*args, **kwargs))
+        rst.headers['Access-Control-Allow-Origin'] = '*'
+        rst.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
+        allow_headers = 'Referer,Accept,Origin,User-Agent'
+        rst.headers['Access-Control-Allow-Headers'] = allow_headers
+        return rst
+    return wrapper_fun
 
 
 @api.route('/comment', methods=['POST'])
@@ -36,6 +48,7 @@ def markdown_get():
 
 
 @api.route('/test/login', methods=['POST'])
+@allow_cross_domain
 def email_login():
     request_json = request.get_json()
     if request_json.get("username"):
@@ -56,6 +69,7 @@ def email_login():
 
 
 @api.route('/test/getmail', methods=['GET'])
+@allow_cross_domain
 def email_get():
     if request.args.get('username'):
         username = request.args.get('username')
@@ -72,6 +86,7 @@ def email_get():
 
 
 @api.route('/test/logout', methods=['GET'])
+@allow_cross_domain
 def email_logout():
     if request.args.get('username'):
         username = request.args.get('username')
