@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <style type="text/css">
+    a {
+        text-decoration: None;
+        color: #000;
+    }
+    .login {
+        border: 2px;
+        background: #eee;
+    }
+    </style>
+    <script type="text/javascript" src="/static/js/test.js"></script>
+</head>
+<body>
+<div class="mail"></div>
+<form method="post" action="/api/1.0/test/login">
+    <div class="inputs">
+        <span>username</span>
+        <input id="username" name="username" value="username"></input>    
+    </div>
+    <div class="inputs">
+        <span>password</span>
+        <input id="password" name="password" value="password"></input>
+    </div>
+    <div class="inputs">
+        <a class="login" href="#" onclick="javascript:Login()">Login</a>
+    </div>
+    <div class="inputs">
+        <a class="login" href="#" onclick="javascript:getMail()">Getmail</a>
+    </div>
+    <div class="inputs">
+        <a class="login" href="#" onclick="javascript:Logout()">Logout</a>
+    </div>
+    <hr />
+    <div class="passage"></div>
+</form>
+</body>
+</html>
