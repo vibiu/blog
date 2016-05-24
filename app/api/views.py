@@ -6,15 +6,18 @@ from functools import wraps
 from datetime import datetime
 from render import splite_code
 from mail163 import LoginUser, jsonfy_mail_info
+from library import LibStudent
 
 from . import api
+
 
 def allow_cross_domain(fun):
     @wraps(fun)
     def wrapper_fun(*args, **kwargs):
         rst = make_response(fun(*args, **kwargs))
         rst.headers['Access-Control-Allow-Origin'] = '*'
-        rst.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
+        rst.headers[
+            'Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
         allow_headers = 'Referer,Accept,Origin,User-Agent,Content-Type, X-Requested-With'
         rst.headers['Access-Control-Allow-Headers'] = allow_headers
         return rst
@@ -107,3 +110,13 @@ def email_logoutall():
         return jsonify({"message": "delete all login user done"}), 200
     except Exception as e:
         return jsonify({"message": "internal server error"}), 500
+
+
+@api.route('/lib/info', methods=['GET'])
+def lib_search():
+    marc_no = request.args.get('marc_no')
+    if marc_no:
+        student = LibStudent()
+        book_info = student.get_book_info(marc_no)
+        return jsonify({'book': book_info}), 200
+    return jsonify({'message': 'bad request'}), 400
