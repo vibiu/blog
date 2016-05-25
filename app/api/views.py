@@ -1,6 +1,6 @@
 from flask import request, jsonify, abort, session, make_response
 from markdown import markdown
-from .. models import Comment, Article
+from .. models import Comment, Article, Book
 from .. import db
 from functools import wraps
 from datetime import datetime
@@ -8,7 +8,18 @@ from render import splite_code
 from mail163 import LoginUser, jsonfy_mail_info
 from library import LibStudent
 
+
+import json
+# import logging
+import os
+
 from . import api
+
+# path = '/'.join([os.path.dirname(__file__), 'api.log'])
+# logging.basicConfig(
+#     filename=path, filemode='wb', level=logging.DEBUG)
+
+# logging.warn(path)
 
 
 def allow_cross_domain(fun):
@@ -17,8 +28,10 @@ def allow_cross_domain(fun):
         rst = make_response(fun(*args, **kwargs))
         rst.headers['Access-Control-Allow-Origin'] = '*'
         rst.headers[
-            'Access-Control-Allow-Methods'] = 'POST, GET, PUT, PATCH, DELETE, OPTIONS'
-        allow_headers = 'Referer,Accept,Origin,User-Agent,Content-Type, X-Requested-With'
+            'Access-Control-Allow-Methods'] = 'POST, GET, '\
+            'PUT, PATCH, DELETE, OPTIONS'
+        allow_headers = 'Referer,Accept,Origin,User-Agent,'\
+            'Content-Type, X-Requested-With'
         rst.headers['Access-Control-Allow-Headers'] = allow_headers
         return rst
     return wrapper_fun
@@ -113,10 +126,39 @@ def email_logoutall():
 
 
 @api.route('/lib/info', methods=['GET'])
+@allow_cross_domain
 def lib_search():
     marc_no = request.args.get('marc_no')
     if marc_no:
+        book = Book.query.filter_by(marc_no=marc_no).first()
+    else:
+        return jsonify({'message': 'bad request'}), 400
+
+    if book:
+        time_diff = datetime.now() - book.timestamp
+        diff = time_diff.total_seconds()
+        print diff
+    else:
         student = LibStudent()
         book_info = student.get_book_info(marc_no)
+        timestamp = datetime.now()
+        book = Book(
+            marc_no=marc_no,
+            content=unicode(json.dumps(book_info)),
+            timestamp=timestamp)
+        db.session.add(book)
+        db.session.commit()
         return jsonify({'book': book_info}), 200
-    return jsonify({'message': 'bad request'}), 400
+
+    if diff < 3600:
+        book_info = json.loads(book.content)
+        return jsonify({'book': book_info}), 200
+    else:
+        student = LibStudent()
+        book_info = student.get_book_info(marc_no)
+        timestamp = datetime.now()
+        book.content = unicode(json.dumps(book_info))
+        book.timestamp = timestamp
+        db.session.add(book)
+        db.session.commit()
+        return jsonify({'book': book_info}), 200

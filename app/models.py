@@ -17,3 +17,11 @@ class Article(db.Model):
     topic = db.Column(db.Unicode(64))
     body = db.Column(db.Unicode(1024))
     timestamp = db.Column(db.DateTime, index=True)
+
+class Book(db.Model):
+    __tablename__ = 'books'
+    id = db.Column(db.Integer, primary_key=True)
+    marc_no = db.Column(db.Unicode(10),index=True)
+    content = db.Column(db.Unicode(2048))
+    timestamp = db.Column(db.DateTime)
+
