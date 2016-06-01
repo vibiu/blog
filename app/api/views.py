@@ -1,6 +1,7 @@
+# coding: utf-8
 from flask import request, jsonify, abort, session, make_response
 from markdown import markdown
-from .. models import Comment, Article, Book
+from .. models import Comment, Article, Book, Course
 from .. import db
 from functools import wraps
 from datetime import datetime
@@ -162,3 +163,36 @@ def lib_search():
         db.session.add(book)
         db.session.commit()
         return jsonify({'book': book_info}), 200
+
+
+@api.route('/course/info', methods=['GET'])
+def query_course():
+    page = request.args.get('page') or 0
+    step = request.args.get('step') or 10
+    all_course = Course.query.all()
+    total = len(all_course)
+
+    if int(page) is not 0:
+        try:
+            start = (int(page)-1)*int(step)
+            end = int(page)*int(step)
+            all_course = all_course[start:end]
+        except IndexError as e:
+            print 'e'
+
+    filter_fun = lambda course: {
+        'id': course.id,
+        'classify': course.classify,
+        'topic': course.topic,
+        'teacher': course.teacher,
+        'introduction': course.introduction,
+        'form': course.form,
+        'frequency': course.frequency,
+        'dispass': course.dispass
+    }
+    course_list = [filter_fun(course) for course in all_course]
+    return jsonify(
+        courses=course_list,
+        total=total,
+        message=u'获取成功',
+        status=1), 200
