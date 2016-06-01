@@ -4,7 +4,6 @@ Flask==0.10.1
 Flask-Markdown==0.3
 Flask-Script==0.6.6
 Flask-SQLAlchemy==1.0
-foo==0.0.0
 itsdangerous==0.24
 Jinja2==2.8
 Markdown==2.6.6
