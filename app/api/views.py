@@ -166,6 +166,7 @@ def lib_search():
 
 
 @api.route('/course/info', methods=['GET'])
+@allow_cross_domain
 def query_course():
     page = request.args.get('page') or 0
     step = request.args.get('step') or 10
@@ -174,11 +175,11 @@ def query_course():
 
     if int(page) is not 0:
         try:
-            start = (int(page)-1)*int(step)
-            end = int(page)*int(step)
+            start = (int(page) - 1) * int(step)
+            end = int(page) * int(step)
             all_course = all_course[start:end]
         except IndexError as e:
-            print 'e'
+            print e
 
     filter_fun = lambda course: {
         'id': course.id,

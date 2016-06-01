@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>course test</title>
+    <style type="text/css">
+     #main-table {
+        font-family: verdana,arial,sans-serif;
+        font-size:16px;
+        color:#333333;
+        border-width: 0px;
+        border-color: #666666;
+        border-collapse: collapse;
+     }
+     #main-table th {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #dedede;
+     }
+     #main-table td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ddd;
+     }
+    </style>
+
+    <!-- 引入Vue.js -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.min.js"></script>
+
+</head>
+<body>
+
+<div id="head-title">{{ message }}</div>
+
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>classify</th>
+        <th>topic</th>
+        <th>teacher</th>
+        <th>introduction</th>
+        <th>form</th>
+        <th>frequency</th>
+        <th>dispass</th>
+    </tr>
+    <tr id="main-table" v-for="course in courses">
+        <td>{{ course.id }}</td>
+        <td>{{ course.classify }}</td>
+        <td>{{ course.topic }}</td>
+        <td>{{ course.teacher }}</td>
+        <td>{{ course.introduction }}</td>
+        <td>{{ course.form }}</td>
+        <td>{{ course.frequency }}</td>
+        <td>{{ course.dispass }}</td>
+    </tr>
+</table>
+
+<!-- 底部调用js渲染 -->
+<script type="text/javascript" src="./js/course.js"></script>
+</body>
+</html>
