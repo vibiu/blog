@@ -1,4 +1,5 @@
 # coding: utf-8
+import re
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
@@ -7,18 +8,8 @@ try:
 except ImportError:
     from StringIO import StringIO
 
-import time
-from functools import wraps
-
-
-def timer(func):
-    @wraps(func)
-    def wrapper():
-        before = time.time()
-        func()
-        after = time.time()
-        print 'use', after-before
-    return wrapper
+from HTMLParser import HTMLParser
+htmlparse = HTMLParser().unescape
 
 
 class LibStudent():
@@ -208,3 +199,60 @@ class LibStudent():
         logout_url = 'http://210.35.251.243/reader/logout.php'
         resp = requests.head(logout_url, cookies=self.cookies)
         return None
+
+
+class Libook(object):
+
+    def __init__(self, marc_no=None):
+        self.marc_no = marc_no
+
+    @classmethod
+    def parse_lib(cls, html):
+        libcode = r'<tr align="left" class="whitetext" >'\
+            '\s+<td  width="10%" >(.+?) </td>'\
+            '\s+<td  width="15%" >(.+?)</td>'\
+            '\s+<td  width="10%" >&nbsp;(.+?)</td>'\
+            '\s+<td  width="25%" title=".+?"><img src=".+?" />(.+?)'\
+            '\s+</td>'\
+            '\s+ <td  width="20%" >(<font color=green>)?(.+?)(</font>)?</td>'\
+            '\s+</tr>'
+        libmatch = re.findall(libcode, html, re.S)
+        libdict = lambda match: {
+            'callnum': match[0],
+            'barcode': match[1],
+            'year': match[2],
+            'location': match[3],
+            'status': match[5],
+        }
+        liblist = [libdict(match) for match in libmatch]
+        return liblist
+
+    @classmethod
+    def parse_info(cls, html):
+        infocode = r'<dl class="booklist">'\
+            '\s+<dt>(.+?)</dt>'\
+            '\s+<dd>([^<]*?)(<a .*?href="(.+?)>(.+?)</a>)?([^>]*?)</dd>'\
+            '\s+</dl>'
+        infomatch = re.findall(infocode, html, re.S)
+        infodict = lambda match: {
+            'topic': match[0],
+            'link': match[3],
+            'content': htmlparse(''.join((
+                match[1], match[4], match[5]
+            ))).encode('utf-8')
+        }
+        infolist = [infodict(match) for match in infomatch]
+
+        return infolist
+
+    def get_book(self):
+        book_url = 'http://210.35.251.243/opac/item.php?marc_no={}'.format(
+            self.marc_no)
+        resp = requests.get(book_url)
+        html = resp.content
+        lib = self.parse_lib(html)
+        if lib:
+            info = self.parse_info(html)
+        else:
+            info = []
+        return info, lib

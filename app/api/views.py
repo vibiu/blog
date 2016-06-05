@@ -1,21 +1,24 @@
 # coding: utf-8
+
+import os
+import re
+import json
+from datetime import datetime
+from functools import wraps
+
 from flask import request, jsonify, abort, session, make_response
-from markdown import markdown
 from .. models import Comment, Article, Book, Course
 from .. import db
-from functools import wraps
-from datetime import datetime
+
+from markdown import markdown
 from render import splite_code
 from mail163 import LoginUser, jsonfy_mail_info
-from library import LibStudent
+from library import Libook
 
-
-import json
-# import logging
-import os
 
 from . import api
 
+# import logging
 # path = '/'.join([os.path.dirname(__file__), 'api.log'])
 # logging.basicConfig(
 #     filename=path, filemode='wb', level=logging.DEBUG)
@@ -129,19 +132,29 @@ def email_logoutall():
 @api.route('/lib/info', methods=['GET'])
 @allow_cross_domain
 def lib_search():
+    table = {
+        'callnum': '索书号',
+        'barcode': '条码号',
+        'year': '   年卷期',
+        'location': '校区—馆藏地',
+        'status': '书刊状态'
+    }
     marc_no = request.args.get('marc_no')
-    if marc_no:
+    if marc_no and re.match(r'\d{10}', marc_no):
         book = Book.query.filter_by(marc_no=marc_no).first()
     else:
-        return jsonify({'message': 'bad request'}), 400
+        return jsonify({'message': 'Bad request'}), 400
 
     if book:
         time_diff = datetime.now() - book.timestamp
         diff = time_diff.total_seconds()
-        print diff
     else:
-        student = LibStudent()
-        book_info = student.get_book_info(marc_no)
+        info, lib = Libook(marc_no).get_book()
+        book_info = {
+            'table': table,
+            'info': info,
+            'lib': lib
+        }
         timestamp = datetime.now()
         book = Book(
             marc_no=marc_no,
@@ -155,8 +168,12 @@ def lib_search():
         book_info = json.loads(book.content)
         return jsonify({'book': book_info}), 200
     else:
-        student = LibStudent()
-        book_info = student.get_book_info(marc_no)
+        info, lib = Libook(marc_no).get_book()
+        book_info = {
+            'table': table,
+            'info': info,
+            'lib': lib
+        }
         timestamp = datetime.now()
         book.content = unicode(json.dumps(book_info))
         book.timestamp = timestamp
