@@ -1,3 +1,4 @@
+# coding: utf-8
 import os
 from datetime import datetime
 from sqlalchemy import create_engine
@@ -24,13 +25,14 @@ class Article(Base):
     body = Column(Unicode(1024))
     timestamp = Column(DateTime, index=True)
 
-def save_mkd():
-    with open('main.md', 'r') as mkd_open:
+
+def save_mkd(file, title, topic):
+    with open(file, 'r') as mkd_open:
         mkd_open_read = mkd_open.read().decode('utf-8')
         mkd_article = Article()
         mkd_article.body = mkd_open_read
-        mkd_article.title = 'main'
-        mkd_article.topic = 'aboutme'
+        mkd_article.title = title
+        mkd_article.topic = topic
         mkd_article.timestamp = datetime.utcnow()
 
         session.add(mkd_article)
@@ -46,4 +48,6 @@ session = Session()
 
 
 if __name__ == '__main__':
-    save_mkd()
+    save_mkd('main.md', u'序言', 'main')
+    save_mkd('awesome.md', u'Awesome Github Project', 'bookmark')
+    save_mkd('philosophy.md', u'Program Philosophy', 'thoughts')

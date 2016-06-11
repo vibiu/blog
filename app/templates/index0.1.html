@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>vibiu's Blog</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+    <link rel="stylesheet" href="/static/css/font.css" />
+    <link rel="shortcut icon" href="/static/img/vicon.png"  />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <script type="text/javascript" src="/static/js/index.js"></script>
+</head>
+
+<body>
+<header id="header">
+    <div class="header-container">
+        <hgroup></hgroup>
+        <h1 class="site-title"><a href="/">vibiu</a></h1>
+        <h2 class="site-description">do one thing and do it well</h2>
+        <nav id="site-navigation" class="main-navigation" role="navigation">
+            <li><a href="#">折腾</a></li>
+            <li><a href="#">记录</a></li>
+            <li><a href="#">归档</a></li>
+            <li><a href="#">邻居</a></li>
+            <li><a href="#">关于</a></li>
+        </nav>
+        <ul class="social-links">
+            <li>
+                <a href="#">
+                    <i class="fa fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-weibo"></i>
+                    <span>Weibo</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-feed"></i>
+                    <span>Feed</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</header>
+
+
+<div class="wrapper">
+    <div class="content">
+        <article>
+            <h2><time class="date-updated" datetime="2016-02-07T16:43:08+00:00" itemprop="datePublished" pubdate>Apr,27,2016</time></h2>
+            <div class="passage"></div>
+        </article>
+
+        <h3 id="reply-title">发表评论</h3>
+        <div id="response" class="comment-reponse">
+            <form id="comment-form" class="comment-form" method="post" action="/api/1.0/comment">
+            <div class="comment-form-body">
+                <textarea id="comment-body" class="comment-input" required="required"  name="comment-body"></textarea>
+            </div>
+            <div class="comment-form-email">
+                <label for="url">邮箱地址</label>
+                <input id="comment-email" class="comment-input"  required="required"  name="comment-email"/>
+            </div>
+            <div class="comment-form-submit" onclick="script:commentSubmit()">
+                <span id="comment-submit" href="#">submit</span>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<footer class="footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+    © 2015–2016 Vibiu's Platform| <a href="https://immmmm.com/wordpress-theme-motify.html">Motify Theme Moded</a>
+    <br><br>
+    Not Powered by <a href="https://wordpress.org/" target="_blank">Wordpress</a>
+</footer>
+<script type="text/javascript">
+    insertMarkdown();
+</script>
+</body>
+</html>
