@@ -61,9 +61,16 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
+
+
+# >>>>>>>>>>>>>>>>>>>
+# add by Vibiu
 # Python virtualenv
 venv/
 
 # database
 *.sqlite
+
+# develop fold
+dev/
 
