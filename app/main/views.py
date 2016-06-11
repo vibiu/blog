@@ -7,6 +7,30 @@ from . import main
 from markdown import markdown
 
 
+# this is for markdown parse init
+import houdini as h
+import misaka as m
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
+
+
+class HighlighterRenderer(m.HtmlRenderer):
+    def blockcode(self, text, lang):
+        if not lang:
+            return '\n<pre><code>{}</code></pre>\n'.format(
+                h.escape_html(text.strip()))
+
+        lexer = get_lexer_by_name(lang, stripall=True)
+        formatter = HtmlFormatter()
+
+        return highlight(text, lexer, formatter)
+
+renderer = HighlighterRenderer()
+md = m.Markdown(renderer, extensions=('fenced-code',))
+# end init for markdown
+
+
 @main.route('/', methods=['GET'])
 def index():
 
@@ -42,7 +66,7 @@ def article(id):
     article = Article.query.filter_by(id=id).first()
     if article:
         count = Article.query.count()
-        article.body = markdown(article.body.decode('utf-8'))
-        return render_template('article.html', article=article, count=count)
+        body = md(article.body)
+        return render_template('article.html', article=article, count=count, body=body)
     else:
         abort(404)
