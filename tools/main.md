@@ -8,50 +8,66 @@ Since now, I only use sqlite as my database, I guess I would soon turn to Mysql 
 
 Well, best wishes to myself.
 
-# python code:
-```python
-def bubble_sort(bubble_list):
-    list_length = len(bubble_list)
-    for i in range(list_length):
-        for j in range(i, list_length):
-            if bubble_list[i] > bubble_list[j]:
-                bubble_list[i],bubble_list[j] = bubble_list[j],bubble_list[i]
-    return bubble_list
+# Python Code:
+
+``` python
+import time
+
+
+def timer(func):
+    def wrapper(*kw, **kwargs):
+        before = time.time()
+        func(*kw, **kwargs)
+        after = time.time()
+        print 'use: ', after - before
+    return wrapper
 ```
 
-# shell code:
+# C Code:
 
-```shell
-for i in {1...9};do
-    for j in $(seq 1 $i);do
-        echo -ne $ix$j=$((i*j))\\t;
-    done;
-    echo;
-done;
+``` c
+#include <stdio.h>
+void swap(int *a, int *b){
+    int temp;
+
+    temp = *b;
+    *b = *a;
+    *a = temp;
+}
+int main(){
+    int x, y;
+
+    scanf("%d %d", &x, &y);
+    swap(&x, &y);
+    printf("x is %d, y is %d \n", x, y);
+    return 0;
+}
 ```
 
-# javascript code:
+# JavaScript Code:
 
-```javascript
-if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
-    httpRequest = new XMLHttpRequest();
-} else if (window.ActiveXObject) { // IE 6 and older
-    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-};
-httpRequest.onreadystatechange = function(){
-    if (httpRequest.readyState === XMLHttpRequest.DONE) {
-        if (httpRequest.status === 200) {
-            // perfect!
-        } else {
-            // there was a problem with the request,
-            // for example the response may contain a 404 (Not Found)
-            // or 500 (Internal Server Error) response code
-        }
+``` javascript
+var ajax = function(method, url, cb, data, dataType) {
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
+    xhr.open(method.toUpperCase(), url, true)
+    if (method.toLowerCase() == 'get') {
+        xhr.send(null)
     } else {
-        // still not ready
+        var contentType = 'application/x-www-form-urlencoded'
+        if (dataType) {
+            if (dataType.toLowerCase() == 'json') {
+                contentType = 'application/json'
+            }
+        }
+        xhr.setRequestHeader('Content-type', contentType)
+        xhr.send(data)
     }
-};
-httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-httpRequest.open('GET', 'http://www.example.org/some.file', true);
-httpRequest.send(null);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                cb(xhr.responseText)
+            }
+        }
+    }
+}
 ```
