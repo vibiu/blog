@@ -10,7 +10,8 @@ from flask import request, jsonify, abort, session, make_response
 from .. models import Comment, Article, Book, Course
 from .. import db
 
-from markdown import markdown
+# from markdown import markdown
+from mkd import md
 from render import splite_code
 from mail163 import LoginUser, jsonfy_mail_info
 from library import Libook
@@ -58,13 +59,18 @@ def comment_post():
     return jsonify({"message": "comment success."}), 201
 
 
-@api.route('/markdown', methods=['GET'])
-def markdown_get():
-    markdown_article = Article.query.first()
-    parsed_markdown = markdown(markdown_article.body)
-    beautify_markdown = splite_code(parsed_markdown)
-    # return parsed_markdown, 200
-    return beautify_markdown, 200
+@api.route('/markdown', methods=['POST'])
+def parse_markdown():
+    markdown_json = request.get_json(True)
+    if markdown_json:
+        markdown_content = markdown_json.get('markdown')
+    else:
+        return jsonify({'error': 'bad request'}), 400
+    if markdown_content:
+        parsed_markdown = md(markdown_content)
+    else:
+        return jsonify({'error': 'no markdown content'}), 400
+    return jsonify({'markdown': parsed_markdown}), 200
 
 
 @api.route('/test/login', methods=['POST'])

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>markdown parser</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <style type="text/css">
+    #markdown-area h4 {
+        display: inline-block;
+    }
+    
+    #submit-markdown {
+        display: inline-block;
+        zoom: 1;
+        background: #eee;
+        display: inline;
+        vertical-align: baseline;
+        margin: 0 0 0 370px;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font: 14px/100% Arial, Helvetica, sans-serif;
+        padding: .5em 2em .55em;
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
+        -webkit-border-radius: .5em;
+        -moz-border-radius: .5em;
+        border-radius: .5em;
+        -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+    }
+    
+    #markdown-area {
+        float: left;
+        height: 544px;
+        width: 50%;
+        border-right: 1px solid #c5c5c5;
+    }
+    
+    #markdown-content {
+        width: 100%;
+        height: 500px;
+        overflow: auto;
+        border: 1px solid #c5c5c5;
+        border-right: 0;
+        font: 14px "Courier New", Courier, monospace;
+    }
+    
+    #html-area {
+        float: right;
+        height: 544px;
+        width: 50%;
+    }
+    
+    #html-content {
+        width: 100%;
+        height: 500px;
+        overflow: auto;
+        border: 1px solid #c5c5c5;
+        border-left: 0;
+    }
+    
+    #warning {
+        color: red;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="markdown-area">
+            <h4>Edit your markdown</h4>
+            <div id="submit-markdown" onclick="parseMarkdown()">Parse</div>
+            <textarea id="markdown-content" wrap="logical"></textarea>
+        </div>
+        <div id="html-area">
+            <h4>Html will be here</h4>
+            <div id="html-content"></div>
+        </div>
+    </div>
+    <div id="warning">
+        warning: don't try to do some evil things such as put &lt;script&gt; tags in your markdown.
+    </div>
+    <hr/>
+    <p class="text text-center text-muted">&copy; 2016 Vibiu Rock</p>
+    <script type="text/javascript">
+    var ajax = function(method, url, cb, data, dataType) {
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP')
+        xhr.open(method.toUpperCase(), url, true)
+        if (method.toLowerCase() == 'get') {
+            xhr.send(null)
+        } else {
+            var contentType = 'application/x-www-form-urlencoded'
+            if (dataType) {
+                if (dataType.toLowerCase() == 'json') {
+                    contentType = 'application/json'
+                }
+            }
+            xhr.setRequestHeader('Content-type', contentType)
+            xhr.send(data)
+        }
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    cb(xhr.responseText)
+                }
+            }
+        }
+    }
+    var parseMarkdown = function() {
+        var markdownArea = document.getElementById('markdown-content')
+        var htmlArea = document.getElementById('html-content')
+        var mkd = {
+            markdown: markdownArea.value
+        }
+        var data = JSON.stringify(mkd)
+
+        var parseFunction = function(resp) {
+            var markdownObject = JSON.parse(resp)
+            htmlArea.innerHTML = markdownObject.markdown
+        }
+        ajax('post', '/api/1.0/markdown', parseFunction, data, 'json')
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<p>When you see this. I have make my desision  to build my own blog website.But now it seams that there are still loads of things waiting for me to do.</p>
+
+<p>I&#39;ll talk about the techonical details first. I use python&#39;s frame Flask to build my back-end. I write the front-end by myself, though I was supposed to ask a guy who is professional of front-end to write it. </p>
+
+<p>As for Front-end reverse proxy, Nginx is my choice, beacause it&#39;s free and open source(though I maybe never have the chance to contribute a single code for nginx).</p>
+
+<p>Since now, I only use sqlite as my database, I guess I would soon turn to Mysql or MongoDB. I was weak of Front-end, so I plan to find a Front frame to write my webpage, this could be Bootstrap or React. Maybe I should also learn Vue.js or Anguler.js. But I think I should choose it carefully for the fact that there are to many Front frame coming out these days.</p>
+
+<p>Well, best wishes to myself.</p>
+
+<h1>python code:</h1>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">bubble_list</span><span class="p">):</span>
+    <span class="n">list_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bubble_list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">list_length</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">list_length</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">bubble_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">bubble_list</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">bubble_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">bubble_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">bubble_list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">bubble_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">bubble_list</span>
+</pre></div>
+
+<h1>shell code:</h1>
+<div class="highlight"><pre><span></span><span class="k">for</span> i in <span class="o">{</span>1...9<span class="o">}</span><span class="p">;</span><span class="k">do</span>
+    <span class="k">for</span> j in <span class="k">$(</span>seq <span class="m">1</span> <span class="nv">$i</span><span class="k">)</span><span class="p">;</span><span class="k">do</span>
+        <span class="nb">echo</span> -ne <span class="nv">$ix$j</span><span class="o">=</span><span class="k">$((</span>i*j<span class="k">))</span><span class="se">\\</span>t<span class="p">;</span>
+    <span class="k">done</span><span class="p">;</span>
+    echo<span class="p">;</span>
+<span class="k">done</span><span class="p">;</span>
+</pre></div>
+
+<h1>javascript code:</h1>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">XMLHttpRequest</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Mozilla, Safari, IE7+ ...</span>
+    <span class="nx">httpRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">ActiveXObject</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// IE 6 and older</span>
+    <span class="nx">httpRequest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActiveXObject</span><span class="p">(</span><span class="s2">&quot;Microsoft.XMLHTTP&quot;</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">httpRequest</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">httpRequest</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="nx">XMLHttpRequest</span><span class="p">.</span><span class="nx">DONE</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">httpRequest</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// perfect!</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// there was a problem with the request,</span>
+            <span class="c1">// for example the response may contain a 404 (Not Found)</span>
+            <span class="c1">// or 500 (Internal Server Error) response code</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// still not ready</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="nx">httpRequest</span><span class="p">.</span><span class="nx">setRequestHeader</span><span class="p">(</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s1">&#39;application/x-www-form-urlencoded&#39;</span><span class="p">);</span>
+<span class="nx">httpRequest</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;http://www.example.org/some.file&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="nx">httpRequest</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+</pre></div>
