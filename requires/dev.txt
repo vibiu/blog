@@ -1,0 +1,7 @@
+-r common.txt
+# for markdown C extend
+houdini==0.0.1
+cffi==1.7.0
+misaka==2.0.0
+pycparser==2.14
+Pygments==2.1.3

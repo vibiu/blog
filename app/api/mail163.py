@@ -80,7 +80,8 @@ class LoginUser():
         :param content: str, email content
         """
 
-        email_url = 'http://mail.163.com/js6/s?sid={0}&func=mbox:compose&cl_compose=1'\
+        email_url = 'http://mail.163.com/js6/s?sid={0}'\
+            '&func=mbox:compose&cl_compose=1'\
             '&cl_send=1&l=compose&action=deliver'.format(self.sid)
 
         post_data = {
@@ -114,7 +115,7 @@ class LoginUser():
 
         url_list = self.get_logout_url()
         for url in url_list:
-            res = self.get_url(url)
+            resp = self.get_url(url)
         return True
 
 
@@ -174,7 +175,7 @@ def send_email(username, password, touser, subject, content):
 
 
 def jsonfy_mail_info(data):
-    
+
     infopattern = re.compile(mail_info_pattern, re.S)
     try:
         mail_list = []
@@ -187,16 +188,15 @@ def jsonfy_mail_info(data):
                 "from": mail[4],
                 "to": mail[7],
                 "subject": mail[9],
-                "time": '-'.join([mail[-5], mail[-4], mail[-3], mail[-2], mail[-1]])
+                "time": '-'.join([
+                    mail[-5], mail[-4], mail[-3], mail[-2], mail[-1]
+                ])
             }
             mail_list.append(email)
         return mail_list
     except Exception as e:
         print e
         return []
-    loginuser.logout()
 
 if __name__ == '__main__':
     scan_mail()
-  
-    

@@ -4,8 +4,6 @@ from .. import db
 
 from . import main
 
-from markdown import markdown
-
 
 # this is for markdown parse init
 import houdini as h
@@ -67,6 +65,7 @@ def article(id):
     if article:
         count = Article.query.count()
         body = md(article.body)
-        return render_template('article.html', article=article, count=count, body=body)
+        return render_template('article.html',
+                               article=article, count=count, body=body)
     else:
         abort(404)

@@ -52,30 +52,32 @@ httpRequest.open('GET', 'http://www.example.org/some.file', true);
 httpRequest.send(null);
 </code></pre>
 """
-kw_list = ['False','class','finally','is','return',
-'None','continue','for','lambda','try','True','def',
-'from','nonlocal','while','and','del','global','not',
-'with','as','elif','if','or','yield','assert','else',
-'import','pass','break','except','in','raise']
+kw_list = ['False', 'class', 'finally', 'is', 'return',
+           'None', 'continue', 'for', 'lambda', 'try', 'True', 'def',
+           'from', 'nonlocal', 'while', 'and', 'del', 'global', 'not',
+           'with', 'as', 'elif', 'if', 'or', 'yield', 'assert', 'else',
+           'import', 'pass', 'break', 'except', 'in', 'raise']
+
 
 def splite_code(markdown):
-    codepattern = re.compile('<pre><code>(.+?)</code></pre>',re.S)
+    codepattern = re.compile('<pre><code>(.+?)</code></pre>', re.S)
     find_code = codepattern.findall(markdown)
     blist = []
-    for i,v in enumerate(find_code):
+    for i, v in enumerate(find_code):
         blist.append(main_replace(v))
-    for num,code in enumerate(find_code):
-        markdown = markdown.replace(code,main_replace(code))
+    for num, code in enumerate(find_code):
+        markdown = markdown.replace(code, main_replace(code))
     return markdown
 
-def search_replace(kw,code):
+
+def search_replace(kw, code):
     kwre = '({kw}\s)+'.format(kw=kw)
     kwpattern = re.compile(kwre)
     replace_word = ' <span class="kw">{kw}</span> '.format(kw=kw)
-    return kwpattern.sub(replace_word,code)
+    return kwpattern.sub(replace_word, code)
+
 
 def main_replace(code):
     for kw in kw_list:
-        code = search_replace(kw,code)
+        code = search_replace(kw, code)
     return code
-

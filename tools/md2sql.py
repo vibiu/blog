@@ -72,5 +72,6 @@ if __name__ == '__main__':
     # save_mkd('main.md', u'序言', 'main')
     # save_mkd('awesome.md', u'Awesome Github Project', 'bookmark')
     # save_mkd('philosophy.md', u'Program Philosophy', 'thoughts')
-    update_mkd('main.md', u'序言', 'main')
+    # update_mkd('main.md', u'序言', 'main')
     # query_mkd(u'序言', 'main')
+    pass

@@ -2,7 +2,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-from PIL import Image
+# from PIL import Image
 try:
     from cStringIO import StringIO
 except ImportError:
@@ -42,6 +42,7 @@ class LibStudent():
         print resp.cookies, 'login'
 
     def get_captcha(self):
+        from PIL import Image
         num_dict = {
             '1110011111000111100001111110011111100111'
             '1110011111100111111001111110011110000001': '1',
@@ -113,7 +114,7 @@ class LibStudent():
             try:
                 info_dict[info_td[i].contents[0].string] = info_td[
                     i].contents[1].strip()
-            except Exception, e:
+            except Exception as e:
                 pass
         return info_dict
 

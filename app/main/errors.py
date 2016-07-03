@@ -17,7 +17,7 @@ def bad_request(error):
 
 
 @main.app_errorhandler(403)
-def Forbidden(error):
+def forbidden(error):
     response = jsonify({'error': 'forbidden'})
     response.status_code = 403
     return response

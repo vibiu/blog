@@ -13,7 +13,8 @@ from config import ProductConfig
 
 app = Flask(__name__)
 # app.config[
-#     'SQLALCHEMY_DATABASE_URI'] = 'mysql://pythonadmin:123456@localhost/pythonDB'
+#     'SQLALCHEMY_DATABASE_URI'
+# ] = 'mysql://pythonadmin:123456@localhost/pythonDB'
 app.config['SQLALCHEMY_DATABASE_URI'] = ProductConfig.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 db = SQLAlchemy(app)
