@@ -2,7 +2,7 @@
 import xlrd
 import sys
 sys.path.append("..")
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
 # from app.models import Role, Student, Course, Post
 from app.models import Course
@@ -16,11 +16,11 @@ app = Flask(__name__)
 #     'SQLALCHEMY_DATABASE_URI'
 # ] = 'mysql://pythonadmin:123456@localhost/pythonDB'
 app.config['SQLALCHEMY_DATABASE_URI'] = ProductConfig.SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 
 
-data = xlrd.open_workbook("infos.xlsx")
+data = xlrd.open_workbook("info/infos.xlsx")
 table = data.sheets()[0]
 
 nrows = table.nrows
@@ -45,18 +45,6 @@ def get_classifies_dict():
         if i != 0:
             classify_dict[v] = i
     return classify_dict
-
-
-def insert_classifies():
-
-    classify_dict = get_classifies_dict()
-    for i in classify_dict:
-        classify = Classify()
-        classify.name = i
-        db.session.add(classify)
-        db.session.commit()
-
-    print 'insert classifies done!'
 
 
 def classify_course(course_name):

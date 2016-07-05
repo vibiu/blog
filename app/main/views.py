@@ -1,6 +1,5 @@
-from flask import request, jsonify, render_template, abort
+from flask import render_template, abort, redirect
 from .. models import Article
-from .. import db
 
 from . import main
 
@@ -31,32 +30,33 @@ md = m.Markdown(renderer, extensions=('fenced-code',))
 
 @main.route('/', methods=['GET'])
 def index():
-
-    return render_template('index.html')
+    articles = Article.query.all()
+    return render_template('index.html', articles=articles)
 
 
 @main.route('/archive', methods=['GET'])
 def archive():
     # return render_template('archive.html')
-    return render_template('index.html')
+    return redirect('/')
 
 
 @main.route('/categories', methods=['GET'])
 def categories():
     # return render_template('categories.html')
-    return render_template('index.html')
+    return redirect('/')
 
 
 @main.route('/pages', methods=['GET'])
 def pages():
     # return render_template('tags.html')
-    return render_template('index.html')
+    return redirect('/')
 
 
 @main.route('/tags', methods=['GET'])
 def tags():
     # return render_template('tags.html')
-    return render_template('index.html')
+    # return render_template('index.html')
+    return redirect('/')
 
 
 @main.route('/article/<int:id>', methods=['GET'])

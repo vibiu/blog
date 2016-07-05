@@ -8,6 +8,13 @@ from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
 
+basedir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
+datadir = '/'.join(['sqlite://', basedir, 'data.sqlite'])
+engine = create_engine(datadir)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
 
 class Comment(Base):
     __tablename__ = 'comments'
@@ -34,12 +41,13 @@ def query_mkd(title, topic):
 
 
 def save_mkd(file, title, topic):
-    with open(file, 'r') as mkd_open:
+    path = '/'.join(['article', file])
+    with open(path, 'r') as mkd_open:
         mkd_open_read = mkd_open.read().decode('utf-8')
         mkd_article = Article()
         mkd_article.body = mkd_open_read
-        mkd_article.title = title
-        mkd_article.topic = topic
+        mkd_article.title = unicode(title)
+        mkd_article.topic = unicode(topic)
         mkd_article.timestamp = datetime.utcnow()
 
         session.add(mkd_article)
@@ -49,29 +57,27 @@ def save_mkd(file, title, topic):
 
 def update_mkd(file, title, topic):
     article = session.query(Article).filter_by(title=title).first()
-    print article.title
-    with open(file, 'r') as new_mkd:
+    path = '/'.join(['article', file])
+    with open(path, 'r') as new_mkd:
         new_mkd_read = new_mkd.read().decode('utf-8')
     article.body = new_mkd_read
-    article.title = title
-    article.topic = topic
+    article.title = unicode(title)
+    article.topic = unicode(topic)
     session.add(article)
     session.commit()
     print 'update ok!'
 
 
-basedir = os.path.split(os.path.abspath(os.path.dirname(__file__)))[0]
-datadir = '/'.join(['sqlite://', basedir, 'data.sqlite'])
-engine = create_engine(datadir)
-
-Session = sessionmaker(bind=engine)
-session = Session()
+def list_save():
+    pass
 
 
 if __name__ == '__main__':
     # save_mkd('main.md', u'序言', 'main')
-    # save_mkd('awesome.md', u'Awesome Github Project', 'bookmark')
-    # save_mkd('philosophy.md', u'Program Philosophy', 'thoughts')
-    # update_mkd('main.md', u'序言', 'main')
+    # save_mkd('awesome.md', u'Awesome Github Project', u'bookmark')
+    # save_mkd('philosophy.md', u'Program Philosophy', u'thoughts')
+    # save_mkd('sublime.md', 'Python Coding in Sublime', 'sublime')
+    # update_mkd('main.md', u'序言', u'main')
+    update_mkd('sublime.md', u'Python Coding in Sublime', u'sublime')
     # query_mkd(u'序言', 'main')
     pass

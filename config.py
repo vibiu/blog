@@ -4,7 +4,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRRT_KEY') or 'vibiu_s_screat'
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    # SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     @staticmethod
     def init_app(app):
@@ -24,5 +25,5 @@ class DevelopConfig(Config):
 config = {
     'product': ProductConfig,
     'develop': DevelopConfig,
-    'default': ProductConfig
+    'default': DevelopConfig
 }

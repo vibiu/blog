@@ -49,17 +49,17 @@
                 <div class="content" id="content">
                     {{ body|safe }}
                 </div>
+                <hr>
                 <ul class="tag_box">
                     <strong>Categories:</strong>
-                    <li><span class="label label-primary tag"><a href="/categories.html#watir-ref">
-            test <span class="badge" >8</span>
+                    <li><span class="label label-primary tag"><a href="/categories.html#watir-ref"> {{ article.topic }} <span class="badge" >8</span>
                         </a>
                         </span>
                     </li>
                 </ul>
                 <ul class="tag_box">
                     <strong>Tags:</strong>
-                    <li><span class="label label-primary tag"><a href="/tags.html#watir-ref">test <span class="badge">8</span></a>
+                    <li><span class="label label-primary tag"><a href="/tags.html#watir-ref"> {{ article.topic }} <span class="badge">8</span></a>
                         </span>
                     </li>
                 </ul>
