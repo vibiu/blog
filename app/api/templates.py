@@ -61,4 +61,4 @@ mail_info_pattern = """'id':'(\d+?:.+?)',
 
 
 if __name__ == '__main__':
-    print send_email_xml
+    print(send_email_xml)

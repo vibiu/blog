@@ -2,7 +2,7 @@
 import requests
 import re
 import json
-from templates import get_info_xml, send_email_xml, mail_info_pattern
+from app.api.templates import get_info_xml, send_email_xml, mail_info_pattern
 
 
 class LoginUser():
@@ -125,12 +125,12 @@ def checkout_mail(username, password):
     user = LoginUser(username, password)
     loginuser = user.login()
     if loginuser:
-        print "{} login ok!".format(username)
-        print loginuser.get_mails_info().content
+        print("{} login ok!".format(username))
+        print(loginuser.get_mails_info().content)
         loginuser.logout()
-        print 'logout ok!'
+        print('logout ok!')
     else:
-        print '{0}\'s password {1} invalid'.format(username, password)
+        print('{0}\'s password {1} invalid'.format(username, password))
 
 
 def read_email_count():
@@ -163,15 +163,15 @@ def send_email(username, password, touser, subject, content):
 
     user = LoginUser(username, password)
     loginuser = user.login()
-    print 'sending email'
+    print('sending email')
     loginuser.sent_mail(
         touser, subject=subject, content=content)
-    print 'send ok'
+    print('send ok')
     try:
         loginuser.logout()
-        print 'logout'
+        print('logout')
     except:
-        print 'logout failed'
+        print('logout failed')
 
 
 def jsonfy_mail_info(data):
@@ -195,7 +195,7 @@ def jsonfy_mail_info(data):
             mail_list.append(email)
         return mail_list
     except Exception as e:
-        print e
+        print(e)
         return []
 
 if __name__ == '__main__':

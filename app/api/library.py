@@ -3,12 +3,12 @@ import re
 import requests
 from bs4 import BeautifulSoup
 # from PIL import Image
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO
+# try:
+#     from cStringIO import StringIO
+# except ImportError:
+#     from StringIO import StringIO
 
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 htmlparse = HTMLParser().unescape
 
 
@@ -23,7 +23,7 @@ class LibStudent():
         url = 'http://210.35.251.243/reader/login.php'
         resp = requests.get(url)
         self.cookies = resp.cookies
-        print resp.cookies
+        print(resp.cookies)
 
     def login(self):
         self.get_cookie()
@@ -38,8 +38,8 @@ class LibStudent():
             '{captcha}&select=cert_no&returnUrl='.format(**payload)
         resp = requests.post(login_url, cookies=self.cookies,
                              headers=base_header, data=params)
-        print resp.content
-        print resp.cookies, 'login'
+        print(resp.content)
+        print(resp.cookies, 'login')
 
     def get_captcha(self):
         from PIL import Image
@@ -74,7 +74,7 @@ class LibStudent():
 
         captcha_url = 'http://210.35.251.243/reader/captcha.php'
         resp = requests.get(captcha_url, cookies=self.cookies)
-        print resp.cookies
+        print(resp.cookies)
         img = Image.open(StringIO(resp.content))
 
         def match_catcha(imglist):
@@ -91,7 +91,7 @@ class LibStudent():
         captcha_string = ''.join(
             (match_catcha(parse_captcha(img, i)) for i in xrange(4)))
         self.captcha = captcha_string
-        print self.captcha
+        print(self.captcha)
 
     def get_url(self, url, params=None, headers=None):
         resp = requests.get(

@@ -11,10 +11,10 @@ from .. models import Comment, Article, Book, Course
 from .. import db
 
 # from markdown import markdown
-from mkd import md
-from render import splite_code
-from mail163 import LoginUser, jsonfy_mail_info
-from library import Libook
+from app.api.mkd import md
+# from app.api.render import splite_code
+from app.api.mail163 import LoginUser, jsonfy_mail_info
+from app.api.library import Libook
 
 
 from . import api
@@ -202,7 +202,7 @@ def query_course():
             end = int(page) * int(step)
             all_course = all_course[start:end]
         except IndexError as e:
-            print e
+            print(e)
 
     filter_fun = lambda course: {
         'id': course.id,
